@@ -1,0 +1,25 @@
+Wrote compare function in toDoList.c (L29)   Used same format as our last compare
+
+To test the toDoList.c file, we can use pre-written ordered Bad interface.
+I will be using this to start with, afterwards, we will repace the following
+
+addHeap -> addDynArrOrd
+removeMinHeap -> removeAtDynArr(v, 0)
+getMinHeap -> getDynArr (v, 0)
+
+
+Exicutibles,	prog  is for testing of toDoList   	main.c
+				sprog is testing Heap				main2.c
+				
+'l' to load to-do list from file (function provided for you)
+'s' to save to-do list to file (function provided for you)
+'a' to add a new task to the to-do list
+'g' to get the first task from the to-do list
+'r' to remove the first task from the to-do list
+'p' to print the to-do list (function provided for you)
+'e' to exit the program
+
+struct Task {
+	char description[TASK_DESC_SIZE];  	/* description of the task */
+	int priority;			  			/* task priority */
+};

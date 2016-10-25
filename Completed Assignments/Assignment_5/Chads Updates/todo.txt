@@ -1,0 +1,4 @@
+0	eat
+1	tst
+3	do assignment 5
+101	review trees for Midterm 2

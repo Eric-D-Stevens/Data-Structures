@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Net-Stacked Likert Distribution Demo</title>
+
+
+    <body>
+    
+    <textarea id ="tagData" rows="20"> </textarea>
+    <input type="button" value="submit" onclick="drawTags();" />
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <!--script src="./d3.v3.min.js"> </script-->
+    <script src="./d3.layout.cloud.js"> </script>
+    <script>  
+    
+
+function drawTags(filename) {
+   
+    var textField = document.getElementById('tagData');
+    var dataStrings = textField.value.split("\n");
+    var myArray = [];
+
+    dataStrings.forEach(function(d) {
+	var fields = d.split(",");
+	var newObj = {
+	    'text': fields[0],
+	    'size': fields[1]
+	}
+	myArray.push(newObj);
+    });
+        
+    var fill = d3.scale.category20();
+    var cloud = d3.layout.cloud().size([500,500]);
+  
+    
+    cloud.words(myArray)
+	.rotate(function() { return ~~(Math.random() * 2) * 90; })
+	.font("Impact")
+	.fontSize(function(d) { return 10 + +d.size; })
+	.on("end", draw)
+	.start();
+    
+    
+    function draw(words) {
+	d3.select("body").append("svg")
+	    .attr("width", 500)
+		.attr("height", 500)
+		.append("g")
+		.attr("transform", "translate(250,250)")
+		.selectAll("text")
+		.data(words)
+		.enter().append("text")
+		.style("font-size", function(d) { return +d.size + "px"; })
+		.style("font-family", "Impact")
+		.style("fill", function(d, i) { return fill(i); })
+		.attr("text-anchor", "middle")
+		.attr("transform", function(d) {
+		    return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+		})
+		.text(function(d) { return d.text; });
+	};
+};
+</script>
+    
+</body>
+</html>
+    
